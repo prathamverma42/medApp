@@ -1,0 +1,11 @@
+.card-dash{
+    border-radius: 20px 20px 20px 20px;
+
+    transition: ease all 0.3s;
+    /* border: 2px solid red; */
+}
+.card-dash:hover{
+    border-radius: 0%;
+    transition: ease all 0.3s;
+    transform: scale(1.1);
+}
