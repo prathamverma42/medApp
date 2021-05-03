@@ -1,7 +1,7 @@
 import React from "react";
-import { Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import logo from "../assets/Logo2.png";
-function Navtop(props) {
+function DashNavtop(props) {
   const name = props.name || "Your Name";
   return (
     <div>
@@ -16,7 +16,9 @@ function Navtop(props) {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto"></Nav>
           <Nav>
-            <Nav.Link href="#deets"><h3>Welcome{" "}{name}</h3> </Nav.Link>
+            <Nav.Link href="#deets">
+              <h3>Welcome {name}</h3>{" "}
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -24,4 +26,4 @@ function Navtop(props) {
   );
 }
 
-export default Navtop;
+export default DashNavtop;

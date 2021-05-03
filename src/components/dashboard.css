@@ -1,6 +1,5 @@
-.dash{
-    background-image: url(../assets/userdashbg1.png);
-    background-repeat: repeat;
-    background-size: contain;
-    /* height: 100vh; */
+.dash {
+  background-image: url(../assets/userdashbg1.png);
+  background-repeat: repeat;
+  background-size: contain;
 }
