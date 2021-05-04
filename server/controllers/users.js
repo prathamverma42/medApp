@@ -29,7 +29,7 @@ export const checkUser = async (req, res) => {
     uid: req.body.uid,
     password: req.body.password,
   });
-// console.log(user);
+
   if (user.length===0) {
       res.status(200).json({success: false});
     } else {
