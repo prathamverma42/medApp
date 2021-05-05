@@ -1,4 +1,3 @@
-
 import Profile from "../models/profile.js";
 import Users from "../models/users.js";
 
@@ -18,3 +17,4 @@ export const updateProfile = async(req,res)=> {
 
     const updatedprofile = await Profile.findByIdAndUpdate(req.params.id,req.body,{new:true})
     res.status(200).json(updatedprofile);
+}
