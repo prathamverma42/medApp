@@ -1,19 +1,23 @@
-import { text } from 'express';
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const DiseaseSchema = mongoose.Schema({
   uid: String,
   category: String,
   disease: String,
-  contact:Number,
+  contact: Number,
   symptoms: String,
   recommendations: String,
-  suggestions:text,
+  suggestions: String,
   dos_date: {
     type: Date,
     default: Date.now,
   },
-  pic1:String,
-  pic2:String
+  pic1: String,
+  pic2: String,
+
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Users",
+  },
 });
-const Disease=mongoose.model('Disease',DiseaseSchema);
+const Disease = mongoose.model("Disease", DiseaseSchema);
 export default Disease;

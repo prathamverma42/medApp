@@ -1,17 +1,9 @@
-import Users from '../models/users.js';
+import Users from "../models/users.js";
 export const getUsers = async (req, res) => {
   const users = await Users.find();
   res.status(200).json({
     success: true,
     data: users,
-  });
-};
-export const getUser = async (req, res) => {
-  const id = req.params.id;
-  const user = await Users.findById(id);
-  res.status(200).json({
-    success: true,
-    data: user,
   });
 };
 export const postUser = async (req, res) => {
@@ -24,15 +16,14 @@ export const postUser = async (req, res) => {
 };
 
 export const checkUser = async (req, res) => {
-  let user=[];  
- user = await Users.find({
+  let user = [];
+  user = await Users.find({
     uid: req.body.uid,
     password: req.body.password,
   });
-// console.log(user);
-  if (user.length===0) {
-      res.status(200).json({success: false});
-    } else {
-        res.status(200).json({success: true});
-    }
+  if (user.length === 0) {
+    res.status(200).json({ success: false });
+  } else {
+    res.status(200).json({ success: true });
+  }
 };

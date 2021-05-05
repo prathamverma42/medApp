@@ -1,16 +1,19 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const ProfileSchema = mongoose.Schema({
-  uid: String,
   uname: String,
   gender: String,
-  dob:Date, 
+  dob: Date,
   address: String,
   city: String,
   pin: String,
-  email:String,
-  contact:Number,
-  acard:Number,
-  ppic:String
+  email: String,
+  acard: Number,
+  ppic: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Users",
+    unique: true,
+  },
 });
-const Profile=mongoose.model('Profile',ProfileSchema);
+const Profile = mongoose.model("Profile", ProfileSchema);
 export default Profile;

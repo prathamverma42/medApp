@@ -1,6 +1,5 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const MedicinesSchemm = mongoose.Schema({
-  // rid:Number,
   uid: String,
   medname: String,
   company: String,
@@ -12,9 +11,13 @@ const MedicinesSchemm = mongoose.Schema({
   type: String,
   options: String,
   mrp: Number,
-  oprice:Number,
-  mode:String,
-  city:String
+  oprice: Number,
+  mode: String,
+  city: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Users",
+  },
 });
-const Medicines=mongoose.model('Medicines',MedicinesSchemm);
+const Medicines = mongoose.model("Medicines", MedicinesSchemm);
 export default Medicines;
