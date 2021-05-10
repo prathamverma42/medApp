@@ -1,7 +1,25 @@
-import React from "react";
+import React,{useState} from "react";
 import { Form, Col, Button, Row, Container, lg } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function BuyMedicine() {
+  const [availablemed, setavailablemed] = useState([{
+    medname:'dolo',
+    company:'abc',
+    expdate:Date.now(),
+    available_quantity:10
+  },
+  {
+    medname:'dolo',
+    company:'abc',
+    expdate:Date.now(),
+    available_quantity:10
+  },
+  {
+    medname:'dolo',
+    company:'abc',
+    expdate:Date.now(),
+    available_quantity:10
+  }]);
   return (
     <>
       <Container>
@@ -43,7 +61,7 @@ function BuyMedicine() {
         </Form.Row>
         <br />
         <center>
-          <Button variant="info" className="pl-4 pr-4" type="submit">
+          <Button variant="info" className="pl-4 pr-4" type="submit" >
             Fetch
           </Button>
         </center>

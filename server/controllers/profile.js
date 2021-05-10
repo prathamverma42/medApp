@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Profile from "../models/profile.js";
 import Users from "../models/users.js";
 
@@ -17,4 +18,9 @@ export const updateProfile = async(req,res)=> {
 
     const updatedprofile = await Profile.findByIdAndUpdate(req.params.id,req.body,{new:true})
     res.status(200).json(updatedprofile);
+}
+
+export const getProfilebyId=async(req,res)=>{
+  const getprofile=await Profile.find({user:mongoose.Types.ObjectId(req.params.id)});
+  res.status(201).json(getprofile);
 }

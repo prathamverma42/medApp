@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import UserRoute from "./routes/users.js";
 import ProfileRoute from "./routes/profile.js";
+import DiseaseRoute from "./routes/disease.js";
 const app = express();
 const MONGO_URI =
 // "mongodb+srv://pverma42:prathamverme26142@cluster1.mkm8i.mongodb.net/test"
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/users", UserRoute);
 app.use("/profile",ProfileRoute);
+app.use("/disease",DiseaseRoute);
 mongoose
   .connect(MONGO_URI, {
     useCreateIndex: true,
