@@ -1,15 +1,15 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Dashboard from "./components/pages/Dashboard";
-import "./components/FontawesomeIcons";
-import Home from "./components/pages/Home";
-import BuyMedicine from "./components/pages/BuyMedicine";
-import CommonDisease from "./components/pages/CommonDisease";
-import DiseaseInfo from "./components/pages/DiseaseInfo";
-import UnusedMedicine from "./components/pages/UnusedMedicine";
-import CompleteProfile from "./components/pages/CompleteProfile";
-import MedicineManager from "./components/pages/MedicineManager";
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './components/FontawesomeIcons';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './components/pages/Home';
+import Dashboard from './components/pages/Dashboard';
+import BuyMedicine from './components/pages/BuyMedicine';
+import CommonDisease from './components/pages/CommonDisease';
+import DiseaseInfo from './components/pages/DiseaseInfo';
+import UnusedMedicine from './components/pages/UnusedMedicine';
+import CompleteProfile from './components/pages/CompleteProfile';
+import MedicineManager from './components/pages/MedicineManager';
 function App() {
   return (
     <div>

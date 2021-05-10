@@ -39,7 +39,7 @@ function HomeNavTop(props) {
         handleClose={handleCloseforgotpassword}
       />
 
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top" style={{boxShadow:'0px 0px 10px black'}}>
         <Navbar.Brand href="#home">
           <div style={{ fontSize: "2rem", marginLeft: "-1rem" }}>
             <img src={logo} height="65rem" />
