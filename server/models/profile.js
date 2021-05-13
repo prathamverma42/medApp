@@ -12,7 +12,7 @@ const ProfileSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
-    unique: true,
+    // unique: true,
   },
 });
 const Profile = mongoose.model("Profile", ProfileSchema);

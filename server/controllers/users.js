@@ -27,3 +27,8 @@ export const checkUser = async (req, res) => {
     res.status(200).json({ success: true });
   }
 };
+
+export const getUser =async (req,res)=> {
+  const user = await Users.findById(req.params.id);
+  res.status(200).json({data: user});
+}

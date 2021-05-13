@@ -1,4 +1,7 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { Route } from "react-router-dom";
+
 import { Button, Modal, Form, Col, Container } from "react-bootstrap";
 function LoginModal(props) {
   const exchangeModal_with_ForgotModal = () => {
@@ -8,6 +11,28 @@ function LoginModal(props) {
   const exchangeModal_with_SignupModal = () => {
     props.handleClose();
     props.handleShowSignup();
+  };
+  const [uid, setUid] = useState("");
+  const [password, setPassword] = useState("");
+  const [checklogin, setChecklogin] = useState(false);
+  const checkUserLogin = () => {
+    const body = {
+      uid,
+      password,
+    };
+    console.log(body);
+    axios.post("http://localhost:5000/users/check", body).then((res) => {
+      console.log(res.data);
+      if (res.data.success === true) {
+        // alert("Valid");
+        setPassword("");
+        setUid("");
+        // props.handleClose();
+        setChecklogin(true);
+      } else {
+        alert("Not a valid user");
+      }
+    });
   };
   return (
     <div>
@@ -19,12 +44,26 @@ function LoginModal(props) {
           <Container>
             <Form.Row>
               <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Control type="text" placeholder="Enter Uid" />
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Uid"
+                  value={uid}
+                  onChange={(e) => {
+                    setUid(e.target.value);
+                  }}
+                />
               </Form.Group>
             </Form.Row>
             <Form.Row>
               <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
               </Form.Group>
             </Form.Row>
           </Container>
@@ -37,9 +76,21 @@ function LoginModal(props) {
           </Button>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={props.handleClose}>
+          <Route
+            render={({ history }) => (
+              <Button
+                onClick={() => {
+                  checkUserLogin();
+                  checklogin === true ? history.push(`/Dashboard`) : <p></p>;
+                }}
+              >
+                Login
+              </Button>
+            )}
+          />
+          {/* <Button variant="primary" onClick={checkUserLogin}>
             Login
-          </Button>
+          </Button> */}
         </Modal.Footer>
       </Modal>
     </div>

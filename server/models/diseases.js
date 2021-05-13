@@ -13,7 +13,6 @@ const DiseaseSchema = mongoose.Schema({
   },
   pic1: String,
   pic2: String,
-
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",

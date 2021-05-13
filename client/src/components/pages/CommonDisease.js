@@ -76,8 +76,8 @@ function CommonDisease() {
         </center>
       </Form>
       <br />
-      <Table striped bordered hover variant="dark">
-        <thead>
+      <Table striped bordered hover variant="light">
+        <thead className="bg-dark text-light">
           <tr>
             <th>Symptoms</th>
             <th>Recommendations</th>
@@ -86,12 +86,12 @@ function CommonDisease() {
             <th>Contact</th>
           </tr>
         </thead>
-      </Table>
+      {/* </Table> */}
+      <tbody>
+              
       {findmed.map((med) => {
         return (
           
-            <Table >
-              <tbody>
                 <tr>
                   <td>{med.symptoms}</td>
                   <td>{med.recommendations}</td>
@@ -99,11 +99,11 @@ function CommonDisease() {
                   <td>{med.dos}</td>
                   <td>{med.contact}</td>
                 </tr>
-              </tbody>
-            </Table>
           
-        );
-      })}
+          );
+        })}
+          </tbody>
+        </Table>
     </Container>
   );
 }

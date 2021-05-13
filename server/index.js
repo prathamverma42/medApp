@@ -6,8 +6,8 @@ import ProfileRoute from "./routes/profile.js";
 import DiseaseRoute from "./routes/disease.js";
 const app = express();
 const MONGO_URI =
-// "mongodb+srv://pverma42:prathamverme26142@cluster1.mkm8i.mongodb.net/test"
-  "mongodb+srv://jatingoyal24:jatingoyal30694@cluster0.bmhzl.mongodb.net/medapp";
+"mongodb+srv://pverma42:prathamverma26142@cluster1.mkm8i.mongodb.net/medApp";
+  // "mongodb+srv://jatingoyal24:jatingoyal30694@cluster0.bmhzl.mongodb.net/medapp";
 const PORT = 5000;
 app.use(express.json());
 app.use(cors());

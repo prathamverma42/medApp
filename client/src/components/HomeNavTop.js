@@ -25,21 +25,34 @@ function HomeNavTop(props) {
     <div>
       <LoginModal
         show={showlogin}
+        userid={props.userid}
+        setUserid={props.setUserid}
         handleClose={handleCloseLogin}
         handleShowForgot={handleShowforgotpassword}
         handleShowSignup={handleShowsignup}
       />
       <SignupModal
+        userid={props.userid}
+        setUserid={props.setUserid}
         show={showsignup}
         handleClose={handleClosesignup}
         handleShow={handleShowLogin}
       />
       <ForgotModal
         show={showforgotpassword}
+        userid={props.userid}
+        setUserid={props.setUserid}
         handleClose={handleCloseforgotpassword}
       />
 
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top" style={{boxShadow:'0px 0px 10px black'}}>
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        bg="dark"
+        variant="dark"
+        fixed="top"
+        style={{ boxShadow: "0px 0px 10px black" }}
+      >
         <Navbar.Brand href="#home">
           <div style={{ fontSize: "2rem", marginLeft: "-1rem" }}>
             <img src={logo} height="65rem" />

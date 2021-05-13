@@ -18,10 +18,10 @@ import card2 from '../../assets/card2.svg';
 import card3 from '../../assets/card3.svg';
 import pic1 from '../../assets/pratham.jpg';
 import pic2 from '../../assets/jatin.jpg';
-function Home() {
+function Home(props) {
   return (
     <>
-      <HomeNavTop />
+      <HomeNavTop userid={props.userid} setUserid={props.setUserid}/>
 
       <Carousel fade>
         <Carousel.Item>

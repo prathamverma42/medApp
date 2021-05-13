@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/FontawesomeIcons';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -10,12 +10,23 @@ import DiseaseInfo from './components/pages/DiseaseInfo';
 import UnusedMedicine from './components/pages/UnusedMedicine';
 import CompleteProfile from './components/pages/CompleteProfile';
 import MedicineManager from './components/pages/MedicineManager';
+import SignupCompleteProfile from './components/pages/SignupCompleteProfile';
+// import favicon from '../public/favicon.ico';
+import med from './assets/med1.jpg';
 function App() {
+  // const [pageicon, setPageicon] = useState();
+  const [userid, setUserid] = useState('');
+
+    useEffect(() => {
+// documen 
+    // document.title="hello world";
+    console.log(userid);
+  },[userid])
   return (
     <div>
       <Router>
         <Switch>
-          <Route exact path="/" render={() => <Home />} />
+          <Route exact path="/" render={(props) => <Home userid={userid} setUserid={setUserid} />} />
 
           <Route exact path="/buy-medicine" render={() => <BuyMedicine />} />
 
@@ -41,6 +52,11 @@ function App() {
             exact
             path="/complete-profile"
             render={() => <CompleteProfile />}
+          />
+          <Route
+            exact
+            path="/signup-complete-profile"
+            render={(props) => <SignupCompleteProfile userid={userid} setUserid={setUserid} />}
           />
         </Switch>
       </Router>

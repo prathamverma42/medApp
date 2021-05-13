@@ -134,7 +134,7 @@ function CompleteProfile() {
                   />
                 )}
               </div>
-              <div
+              {/* <div
                 style={{
                   width: "100px",
                   height: "100px",
@@ -142,7 +142,7 @@ function CompleteProfile() {
                 }}
                 ondrop={(e) => console.log(e)}
                 ondragover={(e) => console.log(e)}
-              ></div>
+              ></div> */}
             </center>
           </Form.Group>
         </Form.Row>

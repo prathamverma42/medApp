@@ -2,9 +2,7 @@ import React from "react";
 import "../dashboard.css";
 import CardDash from "../CardDash";
 import { Col, Container, Row } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DashNavtop from "../DashNavtop";
-
 function Dashboard() {
   return (
     <>
@@ -60,10 +58,18 @@ function Dashboard() {
                 />
               </Col>
               <Col sm={3}>
-                <CardDash title="Change Password" icon="key" />
+                <CardDash
+                  title="Change Password"
+                  icon="key"
+                  sendto="password-modal"
+                />
               </Col>
               <Col sm={3}>
-                <CardDash title="Logout Session" icon="sign-out-alt" />
+                <CardDash
+                  title="Logout Session"
+                  icon="sign-out-alt"
+                  sendto="logout"
+                />
               </Col>
             </Row>
           </Container>
