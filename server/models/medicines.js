@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const MedicinesSchemm = mongoose.Schema({
-  uid: String,
+  // uid: String,
   medname: String,
   company: String,
   expdate: {
@@ -10,10 +10,10 @@ const MedicinesSchemm = mongoose.Schema({
   qty: Number,
   type: String,
   options: String,
-  mrp: Number,
+  price: Number,
   oprice: Number,
-  mode: String,
-  city: String,
+  modeofpay: String,
+  // city: String,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",

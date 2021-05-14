@@ -1,9 +1,37 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import { Form, Col, Button, Row, Container, lg, Table } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-function MedicineManager() {
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from 'axios';
+
+function MedicineManager(props) {
   const [findmed, setFindmed] = useState([
   ]);
+  const [uid, setUid] = useState('');
+  useEffect(() => {
+    console.log(props.userid);
+    axios.post(`http://localhost:5000/users/getuser/${props.userid}`).then((res) => {
+      console.log(res.data);
+      setUid(res.data.data.uid);
+    });
+  }, [])
+  
+  const getmedicines =()=> {
+    console.log(props.userid);
+    axios.post("http://localhost:5000/medicine/getmed",{id: props.userid})
+    .then(res=>{
+      console.log('medicine',res.data)
+      setFindmed(res.data);
+    })
+    axios.post("http://localhost:5000/profile/city",{id:props.userid})
+    .then(res=>{
+      console.log('city',res.data);
+      let find_new_med = findmed ;
+      // console.log('old',find_new_med);
+      find_new_med[0].city= res.data.data[0].city;
+      console.log('new',find_new_med);
+      setFindmed(find_new_med);
+    })
+  }
   return (
     <div>
       <Container>
@@ -20,11 +48,11 @@ function MedicineManager() {
         <Form.Row>
           <Form.Group as={Col} className="col-6" controlId="formGridEmail">
             <Form.Label>User id</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" disabled />
+            <Form.Control type="email" placeholder="Enter email" disabled  value={uid}/>
           </Form.Group>
           <Form.Group as={Col} className="col-2"></Form.Group>
           <Form.Group as={Col} className="col-3" controlId="formGridPassword">
-            <Button variant="outline-dark" className="mt-4" size="block">
+            <Button variant="outline-dark" className="mt-4" size="block" onClick={getmedicines}>
               Fetch
             </Button>
           </Form.Group>
@@ -40,23 +68,21 @@ function MedicineManager() {
             <th>Unshare</th>
             <th>Update</th>
           </tr>
-        </thead>
-      {/* </Table> */}
-      <tbody>
-              
-      {findmed.map((med) => {
-        return (
-          
+          </thead>
+          <tbody>
+          {findmed.map(med=>{
+              return(
                 <tr>
-                  <td>{med.symptoms}</td>
-                  <td>{med.recommendations}</td>
-                  <td>{med.suggestions}</td>
-                  <td>{med.dos}</td>
-                  <td>{med.contact}</td>
+                  <td>{med.medname}</td>
+                  <td>{med.company}</td>
+                  <td>{med.city}</td>
+                  <td><Button variant="outline-danger">Unshare</Button></td>
+                  <td><Button variant="outline-info">Update</Button></td>
+
                 </tr>
-          
-          );
-        })}
+              )
+          })}
+    
           </tbody>
         </Table>
         

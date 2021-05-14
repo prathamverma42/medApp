@@ -2,11 +2,64 @@ import React, { useState, useEffect } from "react";
 import { Form, Col, Button, Row, Container, lg } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import med from "../../assets/med.jpg";
-function UnusedMedicine() {
-  const [typeSelect, setTypeSelect] = useState("Donate");
+import axios from "axios";
+function UnusedMedicine(props) {
   const onsubmit = (e) => {
     e.preventDefault();
+    if (typeSelect === "Donate") {
+      setPrice("");
+      setOprice("");
+      setModeofpay("");
+    }
+    const body = {
+      medname,
+      company,
+      expdate,
+      qty,
+      type,
+      typeSelect,
+      price,
+      oprice,
+      modeofpay,
+      user: props.userid
+    };
+    setQty("");
+    setType("");
+    setExpdate("");
+    setCompany("");
+    setMedname("");
+    if (typeSelect === "Sell") {
+      setPrice("");
+      setOprice("");
+      setModeofpay("");
+    }
+    console.log(body);
+
+    axios.post("http://localhost:5000/medicine", body).then((res) => {
+      console.log(res.data);
+      if (res.data.success === true) {
+        alert("post success");
+      }
+    });
   };
+  const [uid, setUid] = useState("");
+  const [medname, setMedname] = useState("");
+  const [company, setCompany] = useState("");
+  const [expdate, setExpdate] = useState("");
+  const [type, setType] = useState("Strips");
+  const [qty, setQty] = useState("");
+  const [typeSelect, setTypeSelect] = useState("Donate");
+  const [price, setPrice] = useState("");
+  const [oprice, setOprice] = useState("");
+  const [modeofpay, setModeofpay] = useState("");
+
+  useEffect(() => {
+    console.log(props.userid);
+    axios.post(`http://localhost:5000/users/getuser/${props.userid}`).then((res) => {
+      // console.log(res.data);
+      setUid(res.data.data.uid);
+    });
+  }, []);
   return (
     <>
       <Container>
@@ -25,13 +78,18 @@ function UnusedMedicine() {
             <Form.Row>
               <Form.Group as={Col} controlId="formGridCity">
                 <Form.Label>User id</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
+                <Form.Control type="text" disabled placeholder="" value={uid} />
               </Form.Group>
             </Form.Row>
             <Form.Row>
               <Form.Group className="mt-3 " as={Col} controlId="formGridCity">
                 <Form.Label>Medicine Name</Form.Label>
-                <Form.Control placeholder="Your Name" />
+                <Form.Control
+                  placeholder="Medicine Name"
+                  value={medname}
+                  required
+                  onChange={(e) => setMedname(e.target.value)}
+                />
               </Form.Group>
             </Form.Row>
           </Form.Group>
@@ -43,24 +101,45 @@ function UnusedMedicine() {
         </Form.Row>
         <Form.Row className="mb-3">
           <Form.Group controlId="formGridAddress1">
-            <Form.Label>Comapny</Form.Label>
-            <Form.Control placeholder="Enter Company" />
+            <Form.Label>Company</Form.Label>
+            <Form.Control
+              placeholder="Company Name"
+              value={company}
+              required
+              onChange={(e) => setCompany(e.target.value)}
+            />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridCity">
             <Form.Label>Exp Date</Form.Label>
-            <Form.Control type="date" placeholder="Enter Date" />
+            <Form.Control
+              type="date"
+              placeholder="Enter Date"
+              value={expdate}
+              required
+              onChange={(e) => setExpdate(e.target.value)}
+            />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridZip">
             <Form.Label>Quantity</Form.Label>
-            <Form.Control placeholder="Enter Quantity" />
+            <Form.Control
+              placeholder="Enter Quantity"
+              value={qty}
+              required
+              onChange={(e) => setQty(e.target.value)}
+            />
           </Form.Group>
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} controlId="formGridState">
             <Form.Label>Type</Form.Label>
-            <Form.Control as="select" defaultValue="Strips">
+            <Form.Control
+              as="select"
+              value={type}
+              required
+              onChange={(e) => setType(e.target.value)}
+            >
               <option>Strips</option>
               <option>Cream</option>
               <option>Tablets</option>
@@ -71,6 +150,7 @@ function UnusedMedicine() {
             <Form.Label>Options</Form.Label>
             <Form.Control
               as="select"
+              required
               onChange={(e) => setTypeSelect(e.target.value)}
             >
               <option value="Donate">Donate</option>
@@ -84,44 +164,68 @@ function UnusedMedicine() {
               {" "}
               <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>Price</Form.Label>
-                <Form.Control placeholder="Mrp" />{" "}
+                <Form.Control
+                  placeholder="Mrp"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                />{" "}
               </Form.Group>
               <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>Offered Price</Form.Label>
-                <Form.Control placeholder="Offered Price" />{" "}
+                <Form.Control
+                  placeholder="Offered Price"
+                  value={oprice}
+                  onChange={(e) => setOprice(e.target.value)}
+                />{" "}
               </Form.Group>
             </Form.Row>
             <Form.Row>
               <Col>
                 <Form.Check
                   type="radio"
+                  value="nb"
                   label="NetBanking"
                   name="formHorizontalRadios"
                   id="formHorizontalRadios1"
+                  onClick={(e) => {
+                    setModeofpay(e.target.value);
+                  }}
                 />
               </Col>
               <Col>
                 <Form.Check
                   type="radio"
+                  value="cod"
                   label="cash on Delivery"
                   name="formHorizontalRadios"
                   id="formHorizontalRadios1"
+                  onClick={(e) => {
+                    setModeofpay(e.target.value);
+                  }}
                 />
               </Col>
               <Col>
                 <Form.Check
                   type="radio"
+                  value="paytm"
                   label="Paytm"
                   name="formHorizontalRadios"
                   id="formHorizontalRadios1"
+                  onClick={(e) => {
+                    setModeofpay(e.target.value);
+                  }}
                 />
               </Col>
               <Col>
                 <Form.Check
                   type="radio"
+                  value="any"
                   label="Any"
                   name="formHorizontalRadios"
                   id="formHorizontalRadios1"
+                  onClick={(e) => {
+                    setModeofpay(e.target.value);
+                  }}
                 />
               </Col>
             </Form.Row>

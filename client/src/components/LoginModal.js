@@ -21,18 +21,21 @@ function LoginModal(props) {
       password,
     };
     console.log(body);
-    axios.post("http://localhost:5000/users/check", body).then((res) => {
-      console.log(res.data);
-      if (res.data.success === true) {
-        // alert("Valid");
-        setPassword("");
-        setUid("");
-        // props.handleClose();
-        setChecklogin(true);
-      } else {
-        alert("Not a valid user");
-      }
-    });
+    if(uid !=="" && password !==""){
+      axios.post("http://localhost:5000/users/check", body).then((res) => {
+        console.log(res.data);
+        if (res.data.success === true) {
+          // alert("Valid");
+          setPassword("");
+          props.setUserid(res.data.data[0]._id);
+          setUid("");
+          // props.handleClose();
+          setChecklogin(true);
+        } else {
+          alert("Not a valid user");
+        }
+      });
+    }
   };
   return (
     <div>

@@ -3,10 +3,10 @@ import "../dashboard.css";
 import CardDash from "../CardDash";
 import { Col, Container, Row } from "react-bootstrap";
 import DashNavtop from "../DashNavtop";
-function Dashboard() {
+function Dashboard(props) {
   return (
     <>
-      <DashNavtop />
+      <DashNavtop userid={props.userid} />
       <div className="dash">
         <center>
           <Container className="pt-5 mt-5">

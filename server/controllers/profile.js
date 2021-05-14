@@ -24,3 +24,7 @@ export const getProfilebyId=async(req,res)=>{
   const getprofile=await Profile.find({user:mongoose.Types.ObjectId(req.params.id)});
   res.status(201).json(getprofile);
 }
+export const getCityById = async (req,res)=>{
+  const profile = await Profile.find({user: req.body.id});
+  res.status(200).json({data: profile});
+}

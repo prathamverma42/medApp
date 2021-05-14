@@ -10,7 +10,7 @@ function SignupCompleteProfile(props) {
 
   useEffect(() => {
     //   console.log('Signup',props.userid);
-    axios.post(`http://localhost:5000/users/${props.userid}`).then((res) => {
+    axios.post(`http://localhost:5000/users/getuser/${props.userid}`).then((res) => {
       console.log(res.data);
       setUserid(res.data.data.uid);
       setContact(res.data.data.mobile);

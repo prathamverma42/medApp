@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Nav, Navbar } from "react-bootstrap";
+import axios from "axios";
 import logo from "../assets/Logo2.png";
+
 function DashNavtop(props) {
-  const name = props.name || "Your Name";
+  const [name, setName] = useState("");
+  useEffect(() => {
+    console.log(props.userid);
+    axios
+      .post(`http://localhost:5000/users/getuser/${props.userid}`)
+      .then((res) => {
+        console.log(res.data)
+        setName(res.data.data.uid);
+      });
+  }, []);
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">

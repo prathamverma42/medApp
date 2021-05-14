@@ -17,6 +17,7 @@ export const postUser = async (req, res) => {
 
 export const checkUser = async (req, res) => {
   let user = [];
+  console.log(req.body);
   user = await Users.find({
     uid: req.body.uid,
     password: req.body.password,
@@ -24,7 +25,7 @@ export const checkUser = async (req, res) => {
   if (user.length === 0) {
     res.status(200).json({ success: false });
   } else {
-    res.status(200).json({ success: true });
+    res.status(200).json({ success: true, data: user });
   }
 };
 

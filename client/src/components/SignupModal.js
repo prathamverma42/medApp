@@ -20,7 +20,7 @@ function SignupModal(props) {
     };
     console.log(body);
     axios
-      .post("http://localhost:5000/users", body)
+      .post("http://localhost:5000/users/add", body)
     .then((res) => {console.log(res.data)
     if(res.data.success===true)
     {

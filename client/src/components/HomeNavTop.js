@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Nav, Navbar, Button, Modal } from "react-bootstrap";
 import logo from "../assets/Logo2.png";
 import LoginModal from "./LoginModal";
@@ -20,7 +20,6 @@ function HomeNavTop(props) {
 
   const handleCloseforgotpassword = () => setShowforgotpassword(false);
   const handleShowforgotpassword = () => setShowforgotpassword(true);
-
   return (
     <div>
       <LoginModal
