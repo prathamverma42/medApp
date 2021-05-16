@@ -21,7 +21,7 @@ function UnusedMedicine(props) {
       price,
       oprice,
       modeofpay,
-      user: props.userid
+      user: props.userid,
     };
     setQty("");
     setType("");
@@ -33,14 +33,27 @@ function UnusedMedicine(props) {
       setOprice("");
       setModeofpay("");
     }
-    console.log(body);
-
+    // console.log(body);
+    // let body_city = "";
+    axios
+      .post("http://localhost:5000/profile/getCityByID_PostMedicine", {
+        id: props.userid,
+      })
+      .then((res) => {
+        console.log(res.data);
+        // body_city = res.data.city;
+        body.city=res.data.city;
+        
     axios.post("http://localhost:5000/medicine", body).then((res) => {
       console.log(res.data);
       if (res.data.success === true) {
         alert("post success");
       }
     });
+
+      });
+    // body.city = body_city;
+
   };
   const [uid, setUid] = useState("");
   const [medname, setMedname] = useState("");
@@ -55,10 +68,12 @@ function UnusedMedicine(props) {
 
   useEffect(() => {
     console.log(props.userid);
-    axios.post(`http://localhost:5000/users/getuser/${props.userid}`).then((res) => {
-      // console.log(res.data);
-      setUid(res.data.data.uid);
-    });
+    axios
+      .post(`http://localhost:5000/users/getuser/${props.userid}`)
+      .then((res) => {
+        // console.log(res.data);
+        setUid(res.data.data.uid);
+      });
   }, []);
   return (
     <>

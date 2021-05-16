@@ -19,18 +19,24 @@ function SignupModal(props) {
       mobile: contact,
     };
     console.log(body);
-    axios
-      .post("http://localhost:5000/users/add", body)
-    .then((res) => {console.log(res.data)
-    if(res.data.success===true)
-    {
-      console.log(res.data.data._id);
-      props.setUserid(res.data.data._id);
-      setChecksignup(true);
-    // props.handleClose();
+    if (uid !== "" && password !== "" && contact !== "") {
+      axios.post("http://localhost:5000/users/add", body).then((res) => {
+        console.log(res.data);
+        if (res.data.success === true) {
+          console.log(res.data.data._id);
+          props.setUserid(res.data.data._id);
+          setChecksignup(true);
+          setContact("");
+          setPassword("");
+          setUid("");
+          // props.handleClose();
 
+          // }
+        }
+      });
+    } else {
+      alert("Hello");
     }
-    });
   };
 
   return (
@@ -80,20 +86,23 @@ function SignupModal(props) {
           </Container>
           <Button onClick={exchangeModal}>Already have an account</Button>
           <Modal.Footer>
-          <Route
-            render={({ history }) => (
-              <Button
-                onClick={() => {
-                  createUserAccount()
-                  checksignup === true ? history.push(`/signup-complete-profile`) : <p></p>;
-                }}
-              >
-                Login
-              </Button>
-            )}
-          />
-            
-            
+            <Route
+              render={({ history }) => (
+                <Button
+                  onClick={() => {
+                    createUserAccount();
+                    checksignup === true ? (
+                      history.push(`/signup-complete-profile`)
+                    ) : (
+                      <p></p>
+                    );
+                  }}
+                >
+                  Login
+                </Button>
+              )}
+            />
+
             {/* <Button variant="primary" onClick={createUserAccount}>
               Signup
             </Button> */}

@@ -33,3 +33,9 @@ export const getDistinctCityById=async(req,res)=>{
   const city=await Profile.find({user:req.body.id});
   res.status(200).json({data:city});
 }
+
+export const getCityByID_PostMedicine = async ( req,res)=> {
+  // console.log(req.body.id);
+  const profile = await Profile.find({user:req.body.id});
+  res.status(200).json({city: profile[0].city});
+}

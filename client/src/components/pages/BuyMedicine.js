@@ -1,7 +1,16 @@
-import React, { useState,useEffect } from "react";
-import { Form, Col, Button, Row, Container, lg, Card } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import {
+  Form,
+  Col,
+  Button,
+  Row,
+  Container,
+  lg,
+  Card,
+  Table,
+} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from 'axios';
+import axios from "axios";
 function BuyMedicine() {
   const [availablemed, setavailablemed] = useState([
     {
@@ -41,30 +50,74 @@ function BuyMedicine() {
       available_quantity: 10,
     },
   ]);
-  
+
   const [distinctCity, setDistinctCity] = useState([]);
   const [distinctMedicine, setDistinctMedicine] = useState([]);
-  let cities=[];
+  const [count, setCount] = useState(0);
+  let cities = [];
+  // useEffect(() => {
+  //   if (count === 0) {
+  //     axios
+  //       .get("http://localhost:5000/medicine/get-distinct-city")
+  //       .then((res) => {
+  //         {
+  //           res.data.data.map(async (user, i) => {
+  //             await axios
+  //               .post("http://localhost:5000/profile/getDistinctCityById", {
+  //                 id: user,
+  //               })
+  //               .then((res) => {
+  //                 cities.push(res.data.data[0].city);
+  //                 console.log("after push", cities);
+  //               });
+  //           });
+  //         }
+  //       });
+  //     setCount(1);
+  //     setDistinctCity(cities);
+  //   }
+  //   console.log(distinctCity);
+  // }, []);
+
   useEffect(() => {
+    axios
+      .get("http://localhost:5000/medicine/getDistinctCity_BuyMedicine")
+      .then((res) => {
+        console.log(res.data);
+        setDistinctCity(res.data.data);
+      });
+  }, []);
 
-   axios.get("http://localhost:5000/medicine/get-distinct-city")
-   .then(res=>{
-     console.log(res.data);
-     {res.data.data.map((user)=> 
-      {
-        axios.post("http://localhost:5000/profile/getDistinctCityById",{id:user}).then(res=>{cities.push(res.data.data[0].city)})
-      }
-      )}
+  // const getcity = () => {
+  //   let cities = [];
+  //   axios
+  //     .get("http://localhost:5000/medicine/get-distinct-city")
+  //     .then((res) => {
+  //       {
+  //         res.data.data.map(async (user, i) => {
+  //           await axios
+  //             .post("http://localhost:5000/profile/getDistinctCityById", {
+  //               id: user,
+  //             })
+  //             .then((res) => {
+  //               cities.push(res.data.data[0].city);
+  //               // setDistinctCity()
+  //               console.log("after push", cities);
+  //             });
+  //         });
+  //       }
+  //     });
+  //   setDistinctCity(cities);
+  // };
+  const getmedicines = (city) => {
+    // console.log(city);
+    axios.post("http://localhost:5000/medicine/getDistinctMedicine_BuyMedicine",{city:city})
+    .then(res=>{
+      console.log(res.data.data[0]);
+      // setDistinctMedicine(res.data.data[0].city);
+
     })
-    console.log('city',cities);
-    while(cities.length!==0){
-      setDistinctCity(cities);
-      console.log('app',distinctCity);
-    }
-    
-
-  }, [])
-  
+  };
   return (
     <>
       <Container>
@@ -84,21 +137,33 @@ function BuyMedicine() {
       </Container>
       <Form className="container my-4">
         <Form.Row>
-          <Form.Group as={Col} controlId="formGridState">
+          <Form.Group as={Col}>
             <Form.Label>Select City</Form.Label>
-            <Form.Control as="select" defaultValue="Male">
+            <Form.Control
+              as="select"
+              onChange={(e) => {
+                if (e.target.value !== "") {
+                  getmedicines(e.target.value);
+                } else {
+                  console.log("hello");
+                }
+              }}
+            >
+              <option value="">choose...</option>
               {distinctCity.map((user) => {
-                return <option>{user.name}</option>;
+                return <option value={user}>{user}</option>;
               })}
             </Form.Control>
+          </Form.Group> 
+          <Form.Group as={Col} controlId="formGridEmail">
           </Form.Group>
-          <Form.Group as={Col} controlId="formGridEmail"></Form.Group>
           <Form.Group as={Col} controlId="formGridPassword">
-            <Form.Group as={Col} controlId="formGridState">
+            <Form.Group as={Col}>
               <Form.Label>Select Medicine</Form.Label>
               <Form.Control as="select" id="male">
                 {distinctMedicine.map((user) => {
-                  return <option>{user.name}</option>;
+                  console.log(user);
+                  return <option>{user}</option>;
                 })}
               </Form.Control>
             </Form.Group>
@@ -111,6 +176,10 @@ function BuyMedicine() {
           </Button>
         </center>
       </Form>
+      <br />
+      <br />
+      
+
       <div className="mt-4">
         <Container>
           <Row>

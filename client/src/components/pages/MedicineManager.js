@@ -22,15 +22,15 @@ function MedicineManager(props) {
       console.log('medicine',res.data)
       setFindmed(res.data);
     })
-    axios.post("http://localhost:5000/profile/city",{id:props.userid})
-    .then(res=>{
-      console.log('city',res.data);
-      let find_new_med = findmed ;
-      // console.log('old',find_new_med);
-      find_new_med[0].city= res.data.data[0].city;
-      console.log('new',find_new_med);
-      setFindmed(find_new_med);
-    })
+    // axios.post("http://localhost:5000/profile/city",{id:props.userid})
+    // .then(res=>{
+    //   console.log('city',res.data);
+    //   let find_new_med = findmed ;
+    //   // console.log('old',find_new_med);
+    //   find_new_med[0].city= res.data.data[0].city;
+    //   console.log('new',find_new_med);
+    //   setFindmed(find_new_med);
+    // })
   }
   return (
     <div>
@@ -64,7 +64,7 @@ function MedicineManager(props) {
             {/* <th>Rid</th> */}
             <th>Medname</th>
             <th>Company</th>
-            <th>City</th>
+            {/* <th>City</th> */}
             <th>Unshare</th>
             <th>Update</th>
           </tr>
@@ -75,7 +75,7 @@ function MedicineManager(props) {
                 <tr>
                   <td>{med.medname}</td>
                   <td>{med.company}</td>
-                  <td>{med.city}</td>
+                  {/* <td>{med.city}</td> */}
                   <td><Button variant="outline-danger">Unshare</Button></td>
                   <td><Button variant="outline-info">Update</Button></td>
 

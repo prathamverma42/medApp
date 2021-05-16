@@ -13,7 +13,7 @@ const MedicinesSchemm = mongoose.Schema({
   price: Number,
   oprice: Number,
   modeofpay: String,
-  // city: String,
+  city: String,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
