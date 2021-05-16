@@ -84,7 +84,7 @@ function DiseaseInfo() {
           <Form.Control as="textarea" rows={6} />
         </Form.Group>
 
-        <Form.Row>
+        {/* <Form.Row>
           <Form.Group as={Col} controlId="formGridState">
             <Form.Label>Upload Pic</Form.Label>
             <Form.Control type="file" placeholder="Enter you email id" />{" "}
@@ -96,7 +96,7 @@ function DiseaseInfo() {
             <Form.Group as={Col} controlId="formGridState"></Form.Group>
           </Form.Group>
         </Form.Row>
-        <br />
+        <br /> */}
         <center>
           {" "}
           <Button variant="info" className="pl-4 pr-4" type="submit">

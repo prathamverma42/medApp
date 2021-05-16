@@ -8,3 +8,7 @@ export const getmedicine = async(req, res)=> {
     const medicines = await Medicines.find({user: req.body.id});
     res.status(200).json(medicines);
 }
+export const getDistinctCity = async (req,res)=> {
+    const cities = await Medicines.collection.distinct("user");
+    res.status(200).json({data: cities});
+}

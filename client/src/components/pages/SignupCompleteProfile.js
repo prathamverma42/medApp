@@ -5,8 +5,8 @@ import { Route } from "react-router-dom";
 import axios from "axios";
 
 function SignupCompleteProfile(props) {
-  const [selectedFile, setSelectedFile] = useState();
-  const [preview, setPreview] = useState();
+  // const [selectedFile, setSelectedFile] = useState();
+  // const [preview, setPreview] = useState();
 
   useEffect(() => {
     //   console.log('Signup',props.userid);
@@ -24,13 +24,13 @@ function SignupCompleteProfile(props) {
     // return () => URL.revokeObjectURL(objectUrl);
   }, []);
 
-  const onSelectFile = (e) => {
-    if (!e.target.files || e.target.files.length === 0) {
-      setSelectedFile(undefined);
-      return;
-    }
-    setSelectedFile(e.target.files[0]);
-  };
+  // const onSelectFile = (e) => {
+  //   if (!e.target.files || e.target.files.length === 0) {
+  //     setSelectedFile(undefined);
+  //     return;
+  //   }
+  //   setSelectedFile(e.target.files[0]);
+  // };
   const [userid, setUserid] = useState("");
   const [contact, setContact] = useState("");
   const [name, setName] = useState("");
@@ -213,7 +213,10 @@ function SignupCompleteProfile(props) {
             />{" "}
           </Form.Group>
         </Form.Row>
-        <Form.Row>
+
+{/* ======================================================= */}
+{/* IMG UPLOAD */}
+        {/* <Form.Row>
           <Form.Group as={Col} controlId="formGridState">
             <Form.Label>Upload Pic</Form.Label>
             <br />
@@ -228,7 +231,7 @@ function SignupCompleteProfile(props) {
                   />
                 )}
               </div>
-              {/* <div
+              <div
                 style={{
                   width: "100px",
                   height: "100px",
@@ -236,10 +239,12 @@ function SignupCompleteProfile(props) {
                 }}
                 ondrop={(e) => console.log(e)}
                 ondragover={(e) => console.log(e)}
-              ></div> */}
+              ></div>
             </center>
           </Form.Group>
-        </Form.Row>
+        </Form.Row> */}
+        {/* ======================================================= */}
+
         <center>
           {" "}
           <Route

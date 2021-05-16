@@ -28,3 +28,8 @@ export const getCityById = async (req,res)=>{
   const profile = await Profile.find({user: req.body.id});
   res.status(200).json({data: profile});
 }
+
+export const getDistinctCityById=async(req,res)=>{
+  const city=await Profile.find({user:req.body.id});
+  res.status(200).json({data:city});
+}

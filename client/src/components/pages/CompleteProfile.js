@@ -4,26 +4,26 @@ import { Form, Col, Button, Row, Container, lg } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function CompleteProfile() {
-  const [selectedFile, setSelectedFile] = useState();
-  const [preview, setPreview] = useState();
+  // const [selectedFile, setSelectedFile] = useState();
+  // const [preview, setPreview] = useState();
 
-  useEffect(() => {
-    if (!selectedFile) {
-      setPreview(undefined);
-      return;
-    }
-    const objectUrl = URL.createObjectURL(selectedFile);
-    setPreview(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [selectedFile]);
+  // useEffect(() => {
+  //   if (!selectedFile) {
+  //     setPreview(undefined);
+  //     return;
+  //   }
+  //   const objectUrl = URL.createObjectURL(selectedFile);
+  //   setPreview(objectUrl);
+  //   return () => URL.revokeObjectURL(objectUrl);
+  // }, [selectedFile]);
 
-  const onSelectFile = (e) => {
-    if (!e.target.files || e.target.files.length === 0) {
-      setSelectedFile(undefined);
-      return;
-    }
-    setSelectedFile(e.target.files[0]);
-  };
+  // const onSelectFile = (e) => {
+  //   if (!e.target.files || e.target.files.length === 0) {
+  //     setSelectedFile(undefined);
+  //     return;
+  //   }
+  //   setSelectedFile(e.target.files[0]);
+  // };
 
   return (
     <div>
@@ -119,7 +119,7 @@ function CompleteProfile() {
             <Form.Control placeholder="Enter you email id" />{" "}
           </Form.Group>
         </Form.Row>
-        <Form.Row>
+        {/* <Form.Row>
           <Form.Group as={Col} controlId="formGridState">
             <Form.Label>Upload Pic</Form.Label>
             <br />
@@ -134,7 +134,7 @@ function CompleteProfile() {
                   />
                 )}
               </div>
-              {/* <div
+              <div
                 style={{
                   width: "100px",
                   height: "100px",
@@ -142,10 +142,10 @@ function CompleteProfile() {
                 }}
                 ondrop={(e) => console.log(e)}
                 ondragover={(e) => console.log(e)}
-              ></div> */}
+              ></div>
             </center>
           </Form.Group>
-        </Form.Row>
+        </Form.Row> */}
         <center>
           {" "}
           <Button variant="success" className="pl-4 pr-4" type="submit">

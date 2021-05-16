@@ -1,44 +1,70 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Form, Col, Button, Row, Container, lg, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from 'axios';
 function BuyMedicine() {
   const [availablemed, setavailablemed] = useState([
     {
       medname: "dolo",
       company: "abc",
-      expdate:  new Date().toDateString(),
+      expdate: new Date().toDateString(),
       available_quantity: 10,
     },
     {
       medname: "dolo",
       company: "abc",
-      expdate:  new Date().toDateString(),
+      expdate: new Date().toDateString(),
       available_quantity: 10,
     },
     {
       medname: "dolo",
       company: "abc",
-      expdate:  new Date().toDateString(),
-      available_quantity: 10,
-    },{
-      medname: "dolo",
-      company: "abc",
-      expdate:  new Date().toDateString(),
+      expdate: new Date().toDateString(),
       available_quantity: 10,
     },
     {
       medname: "dolo",
       company: "abc",
-      expdate:  new Date().toDateString(),
+      expdate: new Date().toDateString(),
       available_quantity: 10,
     },
     {
       medname: "dolo",
       company: "abc",
-      expdate:  new Date().toDateString(),
+      expdate: new Date().toDateString(),
+      available_quantity: 10,
+    },
+    {
+      medname: "dolo",
+      company: "abc",
+      expdate: new Date().toDateString(),
       available_quantity: 10,
     },
   ]);
+  
+  const [distinctCity, setDistinctCity] = useState([]);
+  const [distinctMedicine, setDistinctMedicine] = useState([]);
+  let cities=[];
+  useEffect(() => {
+
+   axios.get("http://localhost:5000/medicine/get-distinct-city")
+   .then(res=>{
+     console.log(res.data);
+     {res.data.data.map((user)=> 
+      {
+        axios.post("http://localhost:5000/profile/getDistinctCityById",{id:user}).then(res=>{cities.push(res.data.data[0].city)})
+      }
+      )}
+    })
+    console.log('city',cities);
+    while(cities.length!==0){
+      setDistinctCity(cities);
+      console.log('app',distinctCity);
+    }
+    
+
+  }, [])
+  
   return (
     <>
       <Container>
@@ -61,19 +87,19 @@ function BuyMedicine() {
           <Form.Group as={Col} controlId="formGridState">
             <Form.Label>Select City</Form.Label>
             <Form.Control as="select" defaultValue="Male">
-              <option>Eyes</option>
-              <option>Ear</option>
-              <option>Nose</option>
+              {distinctCity.map((user) => {
+                return <option>{user.name}</option>;
+              })}
             </Form.Control>
           </Form.Group>
           <Form.Group as={Col} controlId="formGridEmail"></Form.Group>
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Group as={Col} controlId="formGridState">
               <Form.Label>Select Medicine</Form.Label>
-              <Form.Control as="select" defaultValue="Male">
-                <option>Eyes</option>
-                <option>Ear</option>
-                <option>Nose</option>
+              <Form.Control as="select" id="male">
+                {distinctMedicine.map((user) => {
+                  return <option>{user.name}</option>;
+                })}
               </Form.Control>
             </Form.Group>
           </Form.Group>
@@ -86,28 +112,28 @@ function BuyMedicine() {
         </center>
       </Form>
       <div className="mt-4">
-          <Container>
-        <Row>
-        {availablemed.map((med) => {
-          return (
-            <>
-                <Card className="col-3 m-4">
-                  <Card.Header>Medname :- {med.medname}</Card.Header>
-                  <Card.Body>
-                    <p>{med.expdate}</p>
-                    <br />
+        <Container>
+          <Row>
+            {availablemed.map((med) => {
+              return (
+                <>
+                  <Card className="col-3 m-4">
+                    <Card.Header>Medname :- {med.medname}</Card.Header>
+                    <Card.Body>
+                      <p>{med.expdate}</p>
+                      <br />
 
-                    <p>{med.available_quantity}</p>
-                    <br />
+                      <p>{med.available_quantity}</p>
+                      <br />
 
-                    <p>{med.company}</p>
-                  </Card.Body>
-                </Card>
-            </>
-          );
-        })}
-        </Row>
-            </Container>
+                      <p>{med.company}</p>
+                    </Card.Body>
+                  </Card>
+                </>
+              );
+            })}
+          </Row>
+        </Container>
       </div>
     </>
   );
