@@ -1,83 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {
-  Form,
-  Col,
-  Button,
-  Row,
-  Container,
-  lg,
-  Card,
-  Table,
-} from "react-bootstrap";
+import { Form, Col, Button, Row, Container, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 function BuyMedicine() {
-  const [availablemed, setavailablemed] = useState([
-    {
-      medname: "dolo",
-      company: "abc",
-      expdate: new Date().toDateString(),
-      available_quantity: 10,
-    },
-    {
-      medname: "dolo",
-      company: "abc",
-      expdate: new Date().toDateString(),
-      available_quantity: 10,
-    },
-    {
-      medname: "dolo",
-      company: "abc",
-      expdate: new Date().toDateString(),
-      available_quantity: 10,
-    },
-    {
-      medname: "dolo",
-      company: "abc",
-      expdate: new Date().toDateString(),
-      available_quantity: 10,
-    },
-    {
-      medname: "dolo",
-      company: "abc",
-      expdate: new Date().toDateString(),
-      available_quantity: 10,
-    },
-    {
-      medname: "dolo",
-      company: "abc",
-      expdate: new Date().toDateString(),
-      available_quantity: 10,
-    },
-  ]);
+  const [availablemed, setavailablemed] = useState([]);
 
   const [distinctCity, setDistinctCity] = useState([]);
   const [distinctMedicine, setDistinctMedicine] = useState([]);
-  const [count, setCount] = useState(0);
-  let cities = [];
-  // useEffect(() => {
-  //   if (count === 0) {
-  //     axios
-  //       .get("http://localhost:5000/medicine/get-distinct-city")
-  //       .then((res) => {
-  //         {
-  //           res.data.data.map(async (user, i) => {
-  //             await axios
-  //               .post("http://localhost:5000/profile/getDistinctCityById", {
-  //                 id: user,
-  //               })
-  //               .then((res) => {
-  //                 cities.push(res.data.data[0].city);
-  //                 console.log("after push", cities);
-  //               });
-  //           });
-  //         }
-  //       });
-  //     setCount(1);
-  //     setDistinctCity(cities);
-  //   }
-  //   console.log(distinctCity);
-  // }, []);
+  const [selectedcity, setSelectedcity] = useState("");
+  const [selectedmedname, setSelectedmedname] = useState("");
 
   useEffect(() => {
     axios
@@ -88,36 +19,32 @@ function BuyMedicine() {
       });
   }, []);
 
-  // const getcity = () => {
-  //   let cities = [];
-  //   axios
-  //     .get("http://localhost:5000/medicine/get-distinct-city")
-  //     .then((res) => {
-  //       {
-  //         res.data.data.map(async (user, i) => {
-  //           await axios
-  //             .post("http://localhost:5000/profile/getDistinctCityById", {
-  //               id: user,
-  //             })
-  //             .then((res) => {
-  //               cities.push(res.data.data[0].city);
-  //               // setDistinctCity()
-  //               console.log("after push", cities);
-  //             });
-  //         });
-  //       }
-  //     });
-  //   setDistinctCity(cities);
-  // };
   const getmedicines = (city) => {
-    // console.log(city);
-    axios.post("http://localhost:5000/medicine/getDistinctMedicine_BuyMedicine",{city:city})
-    .then(res=>{
-      console.log(res.data.data[0]);
-      // setDistinctMedicine(res.data.data[0].city);
-
-    })
+    axios
+      .post("http://localhost:5000/medicine/getDistinctMedicine_BuyMedicine", {
+        city: city,
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        setDistinctMedicine(res.data.data);
+      });
   };
+  const fetchmedicines = (e) => {
+    e.preventDefault();
+    const body = { city: selectedcity, medname: selectedmedname };
+    console.log(body);
+    axios
+      .post(
+        "http://localhost:5000/medicine/getMedicinesByCity_BuyMedicine",
+        body
+      )
+      .then((res) => {
+        console.log(res.data.data);
+        setDistinctMedicine([]);
+        setavailablemed(res.data.data);
+      });
+  };
+
   return (
     <>
       <Container>
@@ -135,7 +62,7 @@ function BuyMedicine() {
           </Col>
         </Row>
       </Container>
-      <Form className="container my-4">
+      <Form className="container my-4" onSubmit={fetchmedicines}>
         <Form.Row>
           <Form.Group as={Col}>
             <Form.Label>Select City</Form.Label>
@@ -144,6 +71,7 @@ function BuyMedicine() {
               onChange={(e) => {
                 if (e.target.value !== "") {
                   getmedicines(e.target.value);
+                  setSelectedcity(e.target.value);
                 } else {
                   console.log("hello");
                 }
@@ -154,13 +82,23 @@ function BuyMedicine() {
                 return <option value={user}>{user}</option>;
               })}
             </Form.Control>
-          </Form.Group> 
-          <Form.Group as={Col} controlId="formGridEmail">
           </Form.Group>
+          <Form.Group as={Col} controlId="formGridEmail"></Form.Group>
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Group as={Col}>
               <Form.Label>Select Medicine</Form.Label>
-              <Form.Control as="select" id="male">
+              <Form.Control
+                as="select"
+                onChange={(e) => {
+                  if (e.target.value !== "") {
+                    setSelectedmedname(e.target.value);
+                  } else {
+                    console.log("hello");
+                  }
+                }}
+              >
+                <option value="">choose...</option>
+
                 {distinctMedicine.map((user) => {
                   console.log(user);
                   return <option>{user}</option>;
@@ -178,7 +116,6 @@ function BuyMedicine() {
       </Form>
       <br />
       <br />
-      
 
       <div className="mt-4">
         <Container>
@@ -190,11 +127,7 @@ function BuyMedicine() {
                     <Card.Header>Medname :- {med.medname}</Card.Header>
                     <Card.Body>
                       <p>{med.expdate}</p>
-                      <br />
-
-                      <p>{med.available_quantity}</p>
-                      <br />
-
+                      <p>{med.qty}</p>
                       <p>{med.company}</p>
                     </Card.Body>
                   </Card>

@@ -53,7 +53,7 @@ function App() {
             path="/unused-medicine"
             render={(props) => <UnusedMedicine userid={userid} />}
           />
-          <Route exact path="/disease-info" render={() => <DiseaseInfo />} />
+          <Route exact path="/disease-info" render={(props) => <DiseaseInfo userid={userid}  />} />
           <Route
             exact
             path="/complete-profile"
