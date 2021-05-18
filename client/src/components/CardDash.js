@@ -26,11 +26,13 @@ function CardDash(props) {
         show={showPassword}
         handleShow={handlePasswordShow}
         handleClose={handlePasswordClose}
+        userid={props.userid}
       />
       <LogoutModal
         show={showLogout}
         handleShow={handleLogoutShow}
         handleClose={handleLogoutClose}
+        setUserid={props.setUserid}
       />
       <Card style={{ width: "16rem" }} className="mt-5 card-dash">
         <div style={{ fontSize: "6rem", color: "mediumseagreen" }}>

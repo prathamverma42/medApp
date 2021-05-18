@@ -66,7 +66,9 @@ function CommonDisease() {
         setDiseasestable(res.data.data);
         //  let dates= res.data.data[0].dos_date.split('T');
         // console.log(dates);
-        setDisease([]);
+        // setDisease([]);
+        setSelecteddisease("");
+        // setCategory([]);
       });
   };
   return (

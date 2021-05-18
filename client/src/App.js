@@ -35,7 +35,7 @@ function App() {
           <Route
             exact
             path="/dashboard"
-            render={(props) => <Dashboard userid={userid} />}
+            render={(props) => <Dashboard userid={userid} setUserid={setUserid} />}
           />
 
           <Route

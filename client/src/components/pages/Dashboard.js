@@ -62,6 +62,7 @@ function Dashboard(props) {
                   title="Change Password"
                   icon="key"
                   sendto="password-modal"
+                  userid={props.userid}
                 />
               </Col>
               <Col sm={3}>
@@ -69,6 +70,7 @@ function Dashboard(props) {
                   title="Logout Session"
                   icon="sign-out-alt"
                   sendto="logout"
+                  setUserid={props.setUserid}
                 />
               </Col>
             </Row>

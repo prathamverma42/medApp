@@ -29,7 +29,23 @@ export const checkUser = async (req, res) => {
   }
 };
 
-export const getUser =async (req,res)=> {
+export const getUser = async (req, res) => {
   const user = await Users.findById(req.params.id);
-  res.status(200).json({data: user});
+  res.status(200).json({ data: user });
+};
+
+export const checkpassword = async (req, res) => {
+  console.log(req.params.id);
+  const user = await Users.findById(req.params.id);
+  console.log(req.body);
+  if (user.password === req.body.password) {
+    res.status(200).json({ succes: true });
+  } else {
+    res.status(200).json({ succes: false });
+  }
+};
+
+export const updatepassowrd= async (req,res)=> {
+  const user = await Users.findByIdAndUpdate(req.params.id,req.body,{new:true});
+  res.status(200).json({success: true,data: user});
 }

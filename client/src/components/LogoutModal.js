@@ -1,8 +1,8 @@
 import React from "react";
+import { Route } from "react-router-dom";
 
 import { Button, Modal, Form, Col, Container } from "react-bootstrap";
 function LogoutModal(props) {
-  
   return (
     <div>
       <Modal
@@ -15,15 +15,26 @@ function LogoutModal(props) {
           <Modal.Title>Logout</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <p>Are you sure you want to logout?</p>
+          <p>Are you sure you want to logout?</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="outline-dark" onClick={props.handleClose}>
             Close
           </Button>
-          <Button variant="outline-danger" onClick={props.handleClose}>
-           Logout
-          </Button>
+          <Route
+            render={({ history }) => (
+              <Button
+                variant="outline-danger"
+                onClick={() => {
+                  props.handleClose();
+                  history.push("/");
+                  props.setUserid("");
+                }}
+              >
+                Logout
+              </Button>
+            )}
+          />
         </Modal.Footer>
       </Modal>
     </div>
