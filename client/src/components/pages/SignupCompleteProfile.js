@@ -49,7 +49,7 @@ function SignupCompleteProfile(props) {
       user: props.userid,
       name: name,
       gender: gender,
-      adress: adress,
+      address: adress,
       city: city,
       state: state,
       pin: pin,
@@ -66,9 +66,9 @@ function SignupCompleteProfile(props) {
       }
     });
   };
-  useEffect(() => {
-      console.log(saveprofile);
-  }, [saveprofile])
+  // useEffect(() => {
+  //     console.log(saveprofile);
+  // }, [saveprofile])
 
   return (
     <div>

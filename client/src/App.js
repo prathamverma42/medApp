@@ -57,7 +57,7 @@ function App() {
           <Route
             exact
             path="/complete-profile"
-            render={() => <CompleteProfile />}
+            render={() => <CompleteProfile userid={userid}/>}
           />
           <Route
             exact

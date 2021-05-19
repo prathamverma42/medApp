@@ -22,6 +22,11 @@ export const updateProfile = async(req,res)=> {
 
 export const getProfilebyId=async(req,res)=>{
   const getprofile=await Profile.find({user:mongoose.Types.ObjectId(req.params.id)});
+  // console.log(getprofile[0].dob);
+  // let dob = getprofile[0].dob;
+  // let arr = dob.split('T');
+  // console.log(arr);
+  // getprofile.dob=dob[0];
   res.status(201).json(getprofile);
 }
 export const getCityById = async (req,res)=>{

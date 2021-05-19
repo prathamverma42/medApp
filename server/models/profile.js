@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
 const ProfileSchema = mongoose.Schema({
   uname: String,
+  name: String,
   gender: String,
   dob: Date,
   address: String,
   city: String,
+  state: String,
   pin: String,
   email: String,
   acard: Number,
